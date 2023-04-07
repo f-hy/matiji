@@ -1,5 +1,5 @@
 /**
- * @file 4.cc
+ * @file 5.cc
  * @author Friendy (friend0@qq.com)
  * @date 2023-04-06
  * @version 0.1
@@ -19,30 +19,21 @@ using namespace std;
 #define rep(i, s, t) for (int i = s; i <= t; i++)
 #define dwn(i, s, t) for (int i = s; i >= t; i--)
 #define ite(it, s, e) for (auto it = s; it != e; ++it)
-const int maxn = 1e4 + 1;
-int n, odd[maxn], even[maxn], io, ie, a;
-bool is_even[maxn];
+char de[123], c;
+string s;
+int cnt[123];
+int delta[123];  // 97-122
 int main() {
   ios::sync_with_stdio(false);
   // file(data);
-  cin >> n;
-  rep(i, 1, n) {
-    cin >> a;
-    if (a & 1)
-      odd[io++] = a;
-    else {
-      even[ie++] = a;
-      is_even[i] = true;
-    }
+  cin >> s;
+  rep(i, 97, 122) {
+    // scanf("%c", &c);
+    de[i] = s[i - 97];
   }
-  sort(odd, odd + io);
-  sort(even, even + ie);
-  io = 0, ie = 0;
-  rep(i, 1, n) {
-    if (is_even[i]) {
-      cout << even[ie++] << ' ';
-    } else
-      cout << odd[io++] << ' ';
-  }
+  cin >> s;
+  int* ansi = new int[s.size()];
+  rep(i, 0, s.size() - 1)++ cnt[s[i]];
+  rep(i, 97, 122) { rep(j, 1, cnt[de[i]]) cout << char(de[i]); }
   return 0;
 }
