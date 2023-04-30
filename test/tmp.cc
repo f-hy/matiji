@@ -1,33 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 4e5 + 5;
-int rec[400][400], n, m, k;
-vector<int> a;
-vector<int> u, v;
+
+string s1, s2;
+int st1[30], st2[30];
+
 int main() {
-  cin >> n >> m >> k;
-  for (int i = 1; i <= n; i++) {
-    for (int j = 1; j <= m; j++) {
-      scanf("%d", &rec[i][j]);
+  while (cin >> s1 >> s2) {
+    memset(st1, 0, sizeof(st1));
+    memset(st2, 0, sizeof(st2));
+    if (s1.length() != s2.length()) {
+      cout << "NO" << endl;
+      continue;
     }
-  }
-  for (int i = 1; i <= m; i++) u.push_back(rec[1][i]);
-  for (int i = 2; i <= n; i++) {
-    sort(rec[i] + 1, rec[i] + 1 + m);
-    for (int j = 1; j <= k; j++) v.push_back(rec[i][j]);
-    for (int x : u) {
-      for (int y : v) {
-        a.push_back(x + y);
+    for (int i = 0; i < s1.length(); i++) {
+      st1[s1[i] - 'A']++;
+      st2[s2[i] - 'A']++;
+    }
+    sort(st1, st1 + 26);
+    sort(st2, st2 + 26);
+    bool flag = true;
+    for (int i = 0; i < 26; i++) {
+      if (st1[i] != st2[i]) {
+        cout << "NO" << endl;
+        flag = false;
+        break;
       }
     }
-    sort(a.begin(), a.end());
-    while (u.size() != 0) u.pop_back();
-    while (v.size() != 0) v.pop_back();
-    for (int i = 0; i < k; i++) u.push_back(a[i]);
-    while (a.size() != 0) a.pop_back();
-  }
-  for (int i = 0; i < k; i++) {
-    printf("%d ", u[i]);
+    if (flag) {
+      cout << "YES" << endl;
+    }
   }
   return 0;
 }
